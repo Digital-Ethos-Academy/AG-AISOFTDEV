@@ -11,7 +11,7 @@ from PIL import Image
 from io import BytesIO
 import re
 import base64
-import time # For loading indicator
+import time  # For loading indicator
 
 # --- Dynamic Library Installation ---
 try:
@@ -379,17 +379,20 @@ def setup_llm_client(model_name="gpt-4o"):
         if api_provider == "openai":
             from openai import OpenAI
             api_key = os.getenv("OPENAI_API_KEY")
-            if not api_key: raise ValueError("OPENAI_API_KEY not found in .env file.")
+            if not api_key:
+                raise ValueError("OPENAI_API_KEY not found in .env file.")
             client = OpenAI(api_key=api_key)
         elif api_provider == "anthropic":
             from anthropic import Anthropic
             api_key = os.getenv("ANTHROPIC_API_KEY")
-            if not api_key: raise ValueError("ANTHROPIC_API_KEY not found in .env file.")
+            if not api_key:
+                raise ValueError("ANTHROPIC_API_KEY not found in .env file.")
             client = Anthropic(api_key=api_key)
         elif api_provider == "huggingface":
             from huggingface_hub import InferenceClient
             api_key = os.getenv("HUGGINGFACE_API_KEY")
-            if not api_key: raise ValueError("HUGGINGFACE_API_KEY not found in .env file.")
+            if not api_key:
+                raise ValueError("HUGGINGFACE_API_KEY not found in .env file.")
             client = InferenceClient(model=model_name, token=api_key)
         elif api_provider == "gemini" or api_provider == "google": # Google for image generation or STT
             if config.get("audio_transcription"):
@@ -397,8 +400,9 @@ def setup_llm_client(model_name="gpt-4o"):
                 client = speech.SpeechClient()
             else:
                 import google.generativeai as genai
-                api_key = os.getenv("GOOGLE_API_KEY") # Use GOOGLE_API_KEY for both Gemini text and Imagen
-                if not api_key: raise ValueError("GOOGLE_API_KEY not found in .env file.")
+                api_key = os.getenv("GOOGLE_API_KEY")  # Use GOOGLE_API_KEY for both Gemini text and Imagen
+                if not api_key:
+                    raise ValueError("GOOGLE_API_KEY not found in .env file.")
                 genai.configure(api_key=api_key)
                 if config["image_generation"]:
                     # For image generation, the client is not directly a GenerativeModel instance
@@ -419,7 +423,8 @@ def setup_llm_client(model_name="gpt-4o"):
 
 def get_completion(prompt, client, model_name, api_provider, temperature=0.7):
     """Sends a text-only prompt to the LLM and returns the completion."""
-    if not client: return "API client not initialized."
+    if not client:
+        return "API client not initialized."
     try:
         if api_provider == "openai":
             response = client.chat.completions.create(model=model_name, messages=[{"role": "user", "content": prompt}], temperature=temperature)
@@ -443,7 +448,8 @@ def get_completion(prompt, client, model_name, api_provider, temperature=0.7):
 
 def get_vision_completion(prompt, image_url, client, model_name, api_provider):
     """Sends an image and a text prompt to a vision-capable LLM and returns the completion."""
-    if not client: return "API client not initialized."
+    if not client:
+        return "API client not initialized."
     if not RECOMMENDED_MODELS.get(model_name, {}).get("vision"):
         return f"Error: Model '{model_name}' does not support vision."
     try:
@@ -513,7 +519,8 @@ def get_vision_completion(prompt, image_url, client, model_name, api_provider):
 
 def get_image_generation_completion(prompt, client, model_name, api_provider):
     """Generates an image from a text prompt using an image generation LLM."""
-    if not client: return "API client not initialized."
+    if not client:
+        return "API client not initialized."
     if not RECOMMENDED_MODELS.get(model_name, {}).get("image_generation"):
         return f"Error: Model '{model_name}' does not support image generation."
 

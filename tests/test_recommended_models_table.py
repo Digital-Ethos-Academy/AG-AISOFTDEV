@@ -1,4 +1,3 @@
-import pytest
 from utils import recommended_models_table
 
 def test_recommended_models_table_provider_filter():
