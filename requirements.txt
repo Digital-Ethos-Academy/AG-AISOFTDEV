@@ -6,6 +6,7 @@ fastapi
 uvicorn
 sqlalchemy
 pydantic
+email-validator
 flask
 
 # Testing
