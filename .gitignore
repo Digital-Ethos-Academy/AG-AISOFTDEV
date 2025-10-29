@@ -34,10 +34,13 @@ Thumbs.db
 .ipynb_checkpoints
 
 # Course-specific generated files
-# Ignore the entire artifacts directory as it contains generated outputs
+# Artifacts directory contains temporary/generated outputs
 artifacts/
-app/
-tests/
+
+# Database files (but keep schema)
+database/*.db
+database/*.sqlite
+database/*.sqlite3
 
 # Ignore build artifacts
 build/

@@ -1,0 +1,147 @@
+[
+  {
+    "id": 1,
+    "user_story": "As Sarah, the Strategic Systemizer, I want to create and manage standardized onboarding templates for the entire company, so that I can ensure a consistent and high-quality experience for every new hire.",
+    "persona": "Sarah, the Strategic Systemizer",
+    "acceptance_criteria": [
+      "Given I am logged in as an HR admin, When I navigate to the 'Templates' section, Then I should see an option to 'Create New Onboarding Template'.",
+      "Given I am creating a new template, When I add tasks for HR, IT, and the Hiring Manager, Then I can save the template for future use.",
+      "Given an existing template, When I edit it and save the changes, Then all future onboarding plans created from this template will reflect the changes."
+    ]
+  },
+  {
+    "id": 2,
+    "user_story": "As Amelia, the Ambitious Achiever, I want to complete all my HR and tax forms online before my first day, so that I can focus on meeting my team and learning about my role when I start.",
+    "persona": "Amelia, the Ambitious Achiever",
+    "acceptance_criteria": [
+      "Given I have accepted my job offer and received my login credentials, When I log into the pre-boarding portal, Then I should see a 'Paperwork' section with a list of required documents.",
+      "Given I am viewing a required document, When I complete the fields and apply my e-signature, Then the document's status should update to 'Completed' and I should be taken to the next document."
+    ]
+  },
+  {
+    "id": 3,
+    "user_story": "As David, the Dedicated Director, I want to see the progress of my new hire's pre-boarding tasks, so that I can be confident they are ready for their first day.",
+    "persona": "David, the Dedicated Director",
+    "acceptance_criteria": [
+      "Given my new hire is in the pre-boarding phase, When I view their profile in the onboarding tool, Then I should see a checklist of pre-boarding tasks (e.g., 'Paperwork Signed', 'Laptop Configured').",
+      "Given the IT team has configured the new hire's laptop, When they mark the 'Configure Laptop' task as complete, Then I should see the status updated in real-time on my dashboard."
+    ]
+  },
+  {
+    "id": 4,
+    "user_story": "As Amelia, the Ambitious Achiever, I want to receive a digital welcome packet before I start, so that I can reduce my first-day anxiety and feel excited to join.",
+    "persona": "Amelia, the Ambitious Achiever",
+    "acceptance_criteria": [
+      "Given I have completed my pre-boarding paperwork, When I log into the portal, Then I should have access to a 'Welcome Packet' section.",
+      "Given I open the 'Welcome Packet', Then I should be able to view my first-week schedule, a welcome letter from my manager, and an FAQ document."
+    ]
+  },
+  {
+    "id": 5,
+    "user_story": "As David, the Dedicated Director, I want to assign an onboarding buddy to my new hire, so that they have a friendly peer to help them with informal questions and social integration.",
+    "persona": "David, the Dedicated Director",
+    "acceptance_criteria": [
+      "Given I am setting up my new hire's onboarding plan, When I go to the 'Team Integration' section, Then I should see an option to 'Assign a Buddy'.",
+      "Given I have assigned a buddy, When the new hire views their 'My Team' page, Then they should see the buddy's name, photo, and contact information clearly displayed."
+    ]
+  },
+  {
+    "id": 6,
+    "user_story": "As Amelia, the Ambitious Achiever, I want to access a centralized onboarding hub, so that I can find answers to my questions independently and learn about the company at my own pace.",
+    "persona": "Amelia, the Ambitious Achiever",
+    "acceptance_criteria": [
+      "Given I am logged into the onboarding tool, When I click on the 'Onboarding Hub' link, Then I should be taken to a central page with organized resources.",
+      "Given I am in the Onboarding Hub, When I use the search bar to look for 'company acronyms', Then I should be shown a link to the company glossary."
+    ]
+  },
+  {
+    "id": 7,
+    "user_story": "As Sarah, the Strategic Systemizer, I want to populate the onboarding hub with company-wide resources, so that all new hires have access to the same foundational information.",
+    "persona": "Sarah, the Strategic Systemizer",
+    "acceptance_criteria": [
+      "Given I am logged in as an HR admin, When I navigate to the 'Onboarding Hub Management' page, Then I can upload documents, add links, and create pages for content like the employee directory and org chart.",
+      "Given I have published a new version of the company org chart, When any user accesses the Onboarding Hub, Then they will see the updated chart."
+    ]
+  },
+  {
+    "id": 8,
+    "user_story": "As David, the Dedicated Director, I want to create a structured first-week schedule for my new hire from a template, so that they have a clear plan and I don't have to build it from scratch each time.",
+    "persona": "David, the Dedicated Director",
+    "acceptance_criteria": [
+      "Given I am on my new hire's onboarding page, When I click 'Create First Week Schedule', Then I should be presented with a pre-populated template schedule.",
+      "Given I am editing the schedule template, When I add a meeting with a key collaborator and assign it to Day 2, Then the new hire's calendar view should be updated automatically."
+    ]
+  },
+  {
+    "id": 9,
+    "user_story": "As Amelia, the Ambitious Achiever, I want to see my detailed schedule for the first week, so that I know what to expect, where to be, and who I'll be meeting.",
+    "persona": "Amelia, the Ambitious Achiever",
+    "acceptance_criteria": [
+      "Given it is my first day, When I log into the onboarding tool, Then my dashboard should prominently display my schedule for the day.",
+      "Given I am viewing my schedule, When I click on a meeting titled 'Intro with Marketing Team', Then I should see details like the time, location (or video link), and a list of attendees."
+    ]
+  },
+  {
+    "id": 10,
+    "user_story": "As David, the Dedicated Director, I want to assign a small, low-risk 'quick win' project to my new hire, so that they can feel a sense of accomplishment and contribute meaningfully right away.",
+    "persona": "David, the Dedicated Director",
+    "acceptance_criteria": [
+      "Given I am viewing my new hire's task list, When I click 'Add Task', Then I can enter a title, description, and due date for the 'quick win' project.",
+      "Given I have assigned the task, When my new hire marks it as 'Complete', Then I should receive a notification."
+    ]
+  },
+  {
+    "id": 11,
+    "user_story": "As David, the Dedicated Director, I want to use a 30-60-90 day plan template, so that I can set clear expectations and create a roadmap for success for my new hire.",
+    "persona": "David, the Dedicated Director",
+    "acceptance_criteria": [
+      "Given I am on my new hire's profile, When I navigate to the 'Performance Plan' section, Then I can select and apply a '30-60-90 Day Plan' template.",
+      "Given I have applied the template, When I customize the goals for the first 30 days and save, Then both I and my new hire can view and track progress against those goals."
+    ]
+  },
+  {
+    "id": 12,
+    "user_story": "As Amelia, the Ambitious Achiever, I want to view my 30-60-90 day plan, so that I understand what is expected of me and how my success will be measured.",
+    "persona": "Amelia, the Ambitious Achiever",
+    "acceptance_criteria": [
+      "Given my manager has created my 30-60-90 day plan, When I log in and go to my 'Goals' page, Then I should see the plan broken down by 30, 60, and 90-day milestones.",
+      "Given I am viewing a goal in my plan, When I complete a key task related to it, Then I should be able to mark it as complete or add a progress note."
+    ]
+  },
+  {
+    "id": 13,
+    "user_story": "As David, the Dedicated Director, I want to receive automated reminders for my scheduled check-ins with my new hire, so that I maintain a consistent feedback loop without it slipping my mind.",
+    "persona": "David, the Dedicated Director",
+    "acceptance_criteria": [
+      "Given my new hire's weekly 1-on-1 is scheduled for Wednesday at 10 AM, When it is Wednesday at 9 AM, Then I should receive an email and in-app notification reminding me of the meeting.",
+      "Given the reminder notification, When I click on it, Then I should be taken to a page where I can see the new hire's progress and talking points for our check-in."
+    ]
+  },
+  {
+    "id": 14,
+    "user_story": "As David, the Dedicated Director, I want to assign a role-specific onboarding playbook to my new hire, so that they can get the specific technical and process knowledge needed to be effective in their role.",
+    "persona": "David, the Dedicated Director",
+    "acceptance_criteria": [
+      "Given my new hire is a Software Engineer, When I am setting up their onboarding plan, Then I can select the 'Engineering Onboarding Playbook' from a list of available playbooks.",
+      "Given the playbook is assigned, When the new hire logs in, Then they will see a dedicated section with tasks and resources like 'Set up local dev environment' and 'Code review process'."
+    ]
+  },
+  {
+    "id": 15,
+    "user_story": "As Sarah, the Strategic Systemizer, I want to automatically send a feedback survey to new hires, so that I can gather data to measure the effectiveness of the onboarding program and continuously improve it.",
+    "persona": "Sarah, the Strategic Systemizer",
+    "acceptance_criteria": [
+      "Given a new hire has reached their 30-day anniversary, When the system date matches the 30-day mark, Then an automated email with a link to the feedback survey should be sent to the new hire.",
+      "Given a new hire has submitted the survey, When I view the 'Onboarding Analytics' dashboard, Then I should see their anonymized responses aggregated with other feedback."
+    ]
+  },
+  {
+    "id": 16,
+    "user_story": "As Sarah, the Strategic Systemizer, I want a dashboard to track completion rates for mandatory compliance tasks, so that I can ensure the company remains compliant and mitigate risk.",
+    "persona": "Sarah, the Strategic Systemizer",
+    "acceptance_criteria": [
+      "Given I am on the HR admin dashboard, When I view the 'Compliance' widget, Then I should see the overall completion percentage for tasks like 'Security Training' and 'Policy Acknowledgment' across all active new hires.",
+      "Given the completion rate is below our target, When I click on the 'Security Training' metric, Then I should see a list of all new hires who have not yet completed the task."
+    ]
+  }
+]
