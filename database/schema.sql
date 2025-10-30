@@ -1,5 +1,5 @@
 CREATE TABLE users (
-    user_id INTEGER PRIMARY KEY,
+    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
     full_name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     sso_identifier TEXT UNIQUE,
@@ -12,7 +12,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE templates (
-    template_id INTEGER PRIMARY KEY,
+    template_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL UNIQUE,
     description TEXT,
     template_type TEXT NOT NULL CHECK(template_type IN ('ONBOARDING_JOURNEY', 'ROLE_PLAYBOOK', '30_60_90_PLAN')),
@@ -23,7 +23,7 @@ CREATE TABLE templates (
 );
 
 CREATE TABLE template_tasks (
-    template_task_id INTEGER PRIMARY KEY,
+    template_task_id INTEGER PRIMARY KEY AUTOINCREMENT,
     template_id INTEGER NOT NULL,
     title TEXT NOT NULL,
     description TEXT,
@@ -35,7 +35,7 @@ CREATE TABLE template_tasks (
 );
 
 CREATE TABLE onboarding_plans (
-    plan_id INTEGER PRIMARY KEY,
+    plan_id INTEGER PRIMARY KEY AUTOINCREMENT,
     new_hire_user_id INTEGER NOT NULL UNIQUE,
     buddy_user_id INTEGER,
     start_date DATE NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE plan_templates (
 );
 
 CREATE TABLE assigned_tasks (
-    assigned_task_id INTEGER PRIMARY KEY,
+    assigned_task_id INTEGER PRIMARY KEY AUTOINCREMENT,
     plan_id INTEGER NOT NULL,
     assignee_user_id INTEGER NOT NULL,
     template_task_id INTEGER,
@@ -72,7 +72,7 @@ CREATE TABLE assigned_tasks (
 );
 
 CREATE TABLE resources (
-    resource_id INTEGER PRIMARY KEY,
+    resource_id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     resource_type TEXT NOT NULL CHECK(resource_type IN ('LINK', 'DOCUMENT', 'PAGE')),
     content TEXT NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE resources (
 );
 
 CREATE TABLE schedule_events (
-    event_id INTEGER PRIMARY KEY,
+    event_id INTEGER PRIMARY KEY AUTOINCREMENT,
     plan_id INTEGER NOT NULL,
     title TEXT NOT NULL,
     description TEXT,
@@ -106,7 +106,7 @@ CREATE TABLE event_attendees (
 );
 
 CREATE TABLE survey_responses (
-    response_id INTEGER PRIMARY KEY,
+    response_id INTEGER PRIMARY KEY AUTOINCREMENT,
     plan_id INTEGER NOT NULL,
     nps_score INTEGER CHECK(nps_score >= 0 AND nps_score <= 10),
     feedback_text TEXT,
