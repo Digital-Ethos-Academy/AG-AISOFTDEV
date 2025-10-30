@@ -185,6 +185,51 @@ def run_langchain_task(task: str):
 4. Implement sandbox utilities.
 5. Extend README with Agents section.
 
+## 15. Demonstration Curl Commands
+Run these against a local FastAPI server (e.g., `uvicorn app.main:app --reload`).
+
+### Compare Endpoint
+```bash
+curl -s -X POST http://localhost:8000/agents/demo/compare \
+  -H 'Content-Type: application/json' \
+  -d '{"task":"Summarize today\u2019s AI news in 5 bullets","include_trace":true}' | jq '.meta,.timings_ms'
+```
+
+### Plan Project Endpoint (with reviewer)
+```bash
+curl -s -X POST http://localhost:8000/agents/plan/project \
+  -H 'Content-Type: application/json' \
+  -d '{"objective":"Build a markdown sync tool","depth_level":2,"include_risks":true,"include_reviewer":true}' | jq '.plan.reviewer_notes,.meta'
+```
+
+### Code Task Endpoint (execute & review)
+```bash
+curl -s -X POST http://localhost:8000/agents/run/code-task \
+  -H 'Content-Type: application/json' \
+  -d '{"instruction":"Compute factorial of 6","execute":true,"include_review":true,"max_exec_seconds":3}' | jq '.execution,.meta'
+```
+
+### Code Task Timeout Demonstration
+```bash
+curl -s -X POST http://localhost:8000/agents/run/code-task \
+  -H 'Content-Type: application/json' \
+  -d '{"instruction":"Produce an infinite loop","execute":true,"include_review":false,"max_exec_seconds":1}' | jq '.execution.error,.meta'
+```
+
+## 16. Logging & Security Compliance
+Implemented items vs initial spec:
+- Logging: `app/agents/__init__.py` defines a dedicated `agents` logger; service functions emit INFO logs for start/complete events with timing and modes.
+- Sandbox: Working directory isolation (`sandbox_runs/<uuid>` created per execution) and network access blocked by patching `socket.socket`. Timeout produces controlled error string. Restricted builtins loaded; no file or network primitives exposed.
+- Error Isolation: Each framework invocation wrapped so failures produce fallback entries (compare endpoint) or error metadata (code-task execution result).
+- Versioning: Responses include `meta.version = "1.0"` for forward compatibility.
+- Concurrency: Compare endpoint executes framework runners in parallel using asyncio + thread offload.
+
+Pending (future hardening):
+- Memory limits & CPU quota for sandbox (subprocess isolation).
+- Selective framework filtering (`frameworks` query parameter for compare endpoint).
+- Token usage collection and cost estimations.
+
+
 ---
 **Version:** 1.0  
 **Date:** 2025-10-30  
