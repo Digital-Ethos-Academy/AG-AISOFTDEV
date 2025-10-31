@@ -1,3 +1,7 @@
+# Backup of requirements.txt on 2025-10-31
+# (Original file preserved as requirements.txt)
+# This is an automated backup before regenerating via LLM in D4 Lab2.
+
 # Project dependencies for running all notebooks and Python scripts
 # Grouped by purpose; pin versions for core runtime libraries
 

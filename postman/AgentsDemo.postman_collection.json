@@ -1,0 +1,111 @@
+{
+  "info": {
+    "name": "Agents Demo API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for educational Agents API endpoints: compare, plan, code-task."
+  },
+  "item": [
+    {
+      "name": "Compare Agents - Basic",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"task\": \"Summarize today’s AI news in 5 bullets\",\n  \"include_trace\": true\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/agents/demo/compare", "host": ["{{baseUrl}}"], "path": ["agents","demo","compare"] }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 200', () => pm.response.code === 200);",
+              "const json = pm.response.json();",
+              "pm.test('Has results for frameworks', () => ['autogen','crewai','langchain','smolagents'].every(k => json.results[k]));",
+              "pm.test('Concurrency meta present', () => json.meta && json.meta.concurrency === true);",
+              "pm.test('Timings present', () => Object.keys(json.timings_ms || {}).length >= 1);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Plan Project - With Reviewer",
+      "request": {
+        "method": "POST",
+        "header": [ {"key": "Content-Type", "value": "application/json"} ],
+        "body": {"mode": "raw", "raw": "{\n  \"objective\": \"Build a markdown sync tool\",\n  \"depth_level\": 2,\n  \"include_risks\": true,\n  \"include_reviewer\": true\n}"},
+        "url": {"raw": "{{baseUrl}}/agents/plan/project", "host": ["{{baseUrl}}"], "path": ["agents","plan","project"]}
+      },
+      "event": [
+        {"listen":"test","script":{"type":"text/javascript","exec":[
+          "pm.test('Status 200', () => pm.response.code === 200);",
+          "const json = pm.response.json();",
+          "pm.test('Meta version', () => json.meta && json.meta.version === '1.0');",
+          "pm.test('Reviewer notes exist (may be empty fallback)', () => typeof json.plan.reviewer_notes === 'string');",
+          "pm.test('Depth matches', () => json.plan.phases.length === 2);"
+        ]}}
+      ]
+    },
+    {
+      "name": "Plan Project - No Reviewer",
+      "request": {
+        "method": "POST",
+        "header": [ {"key": "Content-Type", "value": "application/json"} ],
+        "body": {"mode": "raw", "raw": "{\n  \"objective\": \"Implement vector search service\",\n  \"depth_level\": 1,\n  \"include_risks\": true,\n  \"include_reviewer\": false\n}"},
+        "url": {"raw": "{{baseUrl}}/agents/plan/project", "host": ["{{baseUrl}}"], "path": ["agents","plan","project"]}
+      },
+      "event": [
+        {"listen":"test","script":{"type":"text/javascript","exec":[
+          "pm.test('Status 200', () => pm.response.code === 200);",
+          "const json = pm.response.json();",
+          "pm.test('Phase count 1', () => json.plan.phases.length === 1);",
+          "pm.test('Review flag false', () => json.meta && json.meta.review_included === false);"
+        ]}}
+      ]
+    },
+    {
+      "name": "Code Task - Execute & Review",
+      "request": {
+        "method": "POST",
+        "header": [{"key":"Content-Type","value":"application/json"}],
+        "body": {"mode":"raw","raw": "{\n  \"instruction\": \"Compute factorial of 6\",\n  \"execute\": true,\n  \"include_review\": true,\n  \"max_exec_seconds\": 3\n}"},
+        "url": {"raw": "{{baseUrl}}/agents/run/code-task", "host": ["{{baseUrl}}"], "path": ["agents","run","code-task"]}
+      },
+      "event": [
+        {"listen":"test","script":{"type":"text/javascript","exec":[
+          "pm.test('Status 200', () => pm.response.code === 200);",
+          "const json = pm.response.json();",
+          "pm.test('Execution ran', () => json.execution && json.execution.ran === true);",
+          "pm.test('Has code', () => typeof json.code === 'string' && json.code.length > 0);",
+          "pm.test('Meta mode present', () => json.meta && json.meta.mode);"
+        ]}}
+      ]
+    },
+    {
+      "name": "Code Task - Timeout",
+      "request": {
+        "method": "POST",
+        "header": [{"key":"Content-Type","value":"application/json"}],
+        "body": {"mode":"raw","raw": "{\n  \"instruction\": \"Produce an infinite loop\",\n  \"execute\": true,\n  \"include_review\": false,\n  \"max_exec_seconds\": 1\n}"},
+        "url": {"raw": "{{baseUrl}}/agents/run/code-task", "host": ["{{baseUrl}}"], "path": ["agents","run","code-task"]}
+      },
+      "event": [
+        {"listen":"test","script":{"type":"text/javascript","exec":[
+          "pm.test('Status 200', () => pm.response.code === 200);",
+          "const json = pm.response.json();",
+          "pm.test('Timeout error flagged or ran', () => json.execution && (json.execution.error || json.execution.ran));"
+        ]}}
+      ]
+    }
+  ],
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:8000"}
+  ]
+}

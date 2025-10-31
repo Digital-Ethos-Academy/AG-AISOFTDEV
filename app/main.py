@@ -12,13 +12,14 @@ from fastapi import FastAPI, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 
 # Import database session dependency
-from database import get_db
+from .database import get_db
 
 # Import SQLAlchemy models
-from models import User
+from .models import User
 
 # Import Pydantic schemas
-from schemas import UserCreate, UserUpdate, UserResponse
+from .schemas import UserCreate, UserUpdate, UserResponse
+from .agents.router import router as agents_router
 
 
 # --- FASTAPI APPLICATION SETUP ---
@@ -28,6 +29,9 @@ app = FastAPI(
     description="API for managing employees, onboarding plans, and related resources.",
     version="1.0.0",
 )
+
+# Include agents demonstration router
+app.include_router(agents_router)
 
 
 # --- API ENDPOINTS ---

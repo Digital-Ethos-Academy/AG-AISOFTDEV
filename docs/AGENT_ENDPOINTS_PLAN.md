@@ -1,3 +1,58 @@
+## 17. Interactive Demo & Postman Usage
+
+### 17.1 Swagger / OpenAPI
+Launch the server and open `http://localhost:8000/docs`.
+1. Call `/agents/health` to verify readiness.
+2. Run `/agents/demo/compare` with a short task (e.g. "Summarize async benefits in Python").
+3. Run `/agents/plan/project` and toggle `include_reviewer` to see reviewer notes.
+4. Run `/agents/run/code-task` with `execute=true` to exercise the sandbox; inspect `execution` and `meta` fields.
+
+### 17.2 Postman Collection
+Files:
+- `postman/AgentsDemo.postman_collection.json`
+- `postman/AgentsDemo.postman_environment.json`
+
+Import both into Postman. No API keys are required in the Postman environment (they are loaded from the server-side `.env`). Click "Run Collection" to execute all requests; tests assert core fields.
+
+### 17.3 Newman CLI
+Install and run:
+```bash
+npm install -g newman
+newman run postman/AgentsDemo.postman_collection.json \
+  -e postman/AgentsDemo.postman_environment.json \
+  --reporters cli,json \
+  --reporter-json-export artifacts/postman_run_report.json
+```
+
+Optional iteration data:
+```bash
+newman run postman/AgentsDemo.postman_collection.json \
+  -e postman/AgentsDemo.postman_environment.json \
+  -d data/tasks.csv
+```
+
+### 17.4 Python Smoke Script
+```python
+import requests, time
+start = time.time()
+r = requests.post("http://localhost:8000/agents/demo/compare", json={"task":"List three benefits of async","include_trace":True,"timeout_seconds":30})
+print("Status", r.status_code)
+data = r.json()
+print("Frameworks:", list(data.get("results", {}).keys()))
+print("Total ms:", data.get("meta", {}).get("total_duration_ms"))
+print("Autogen answer:", data.get("results", {}).get("autogen", {}).get("final_answer"))
+```
+
+### 17.5 Troubleshooting
+| Symptom | Possible Cause | Fix |
+|---------|----------------|-----|
+| Autogen returns stub | Missing `OPENAI_API_KEY` | Export key & restart |
+| Long latency (>30s) | External API slowness | Reduce frameworks or increase timeout |
+| Sandbox execution error | Disallowed import / timeout | Adjust instruction or `max_exec_seconds` |
+| Server stops on curl (130) | Manual SIGINT | Avoid Ctrl-C; use Python script |
+
+---
+End of document additions.
 # Agent Demonstration Endpoints Plan
 
 ## 1. Overview

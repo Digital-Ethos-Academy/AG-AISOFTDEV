@@ -1,0 +1,14 @@
+# Minimal runtime dependencies for FastAPI onboarding API
+# (Exclude heavy dev/RAG/model experimentation libs to keep image slim.)
+fastapi
+uvicorn[standard]
+sqlalchemy
+pydantic
+email-validator
+python-dotenv
+requests
+# Agent framework stubs currently referenced in router/service (may become optional):
+autogen
+crewai
+langchain
+smolagents

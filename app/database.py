@@ -10,8 +10,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
 # The database URL for the SQLite database file.
-# The path is relative to the app/ directory (one level up to project root, then to database/).
-SQLALCHEMY_DATABASE_URL = "sqlite:///../database/onboarding.db"
+# Use a path relative to the container WORKDIR (/app) so SQLite file resides in /app/database.
+# This allows us to mount a volume at /app/database for persistence.
+SQLALCHEMY_DATABASE_URL = "sqlite:///./database/onboarding.db"
 
 # Create the SQLAlchemy engine.
 # The `connect_args` is a SQLite-specific configuration.
